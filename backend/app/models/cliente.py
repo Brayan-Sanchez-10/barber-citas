@@ -9,4 +9,4 @@ class Cliente(Base):
     nombre_cliente= Column(String(100), nullable=False)
     telefono_cliente= Column(String(100), nullable=False)
 
-    turno = relationship("Turno", back_populates="Cliente")
+    turno = relationship("Turno", back_populates="cliente")
