@@ -1,10 +1,9 @@
 from fastapi import APIRouter, status, HTTPException, Depends
 from schemas.s_barbero import BarberoCreate, BarberoDelete, BarberoResponse, BarberoUpdate, BarberoUpdateContrasena
-from models.barbero import Barbero
 from sqlalchemy.orm import Session
 from config.database import get_db
 from services.ser_barbero import get_barberos_service, get_barbero_service, create_barbero_service, update_barbero_service, update_contrasena_barbero_service, delete_barbero_service
-from app.exceptions import NoExisteBarbero, YaExisteBarberoConEseID, ContrasenaIncorrecta, ContrasenaNoCoinciden, ContrasenaNoSeActualizo, BarberoNoSeElimino, BarberoNoSeCreo, BarberoNoSeActualizo
+from exceptions.barbero_exceptions import NoExisteBarbero, YaExisteBarberoConEseID, ContrasenaIncorrecta, ContrasenaNoCoinciden, ContrasenaNoSeActualizo, BarberoNoSeElimino, BarberoNoSeCreo, BarberoNoSeActualizo
 router = APIRouter(
     prefix="/barberos",
     tags=["Barberos"]
@@ -61,7 +60,7 @@ def update_barbero_router(id_barbero: str, barbero: BarberoUpdate, db: Session =
             detail= str(e)
         )
     
-@router.put("/{id_barbero}/contrasena", response_model= BarberoResponse)
+@router.patch("/{id_barbero}/contrasena", response_model= BarberoResponse)
 def update_contrasena_barbero_router(id_barbero: str, data_contrasena: BarberoUpdateContrasena, db :Session = Depends(get_db)):
     try:
         return update_contrasena_barbero_service(id_barbero, data_contrasena, db=db)
@@ -90,7 +89,7 @@ def update_contrasena_barbero_router(id_barbero: str, data_contrasena: BarberoUp
             detail= str(e)
         )
     
-@router.delete("", response_model= BarberoResponse)
+@router.delete("")
 def delete_barbero_router(data_delete : BarberoDelete, db : Session = Depends(get_db)):
     try:
         return delete_barbero_service(data_delete , db = db)

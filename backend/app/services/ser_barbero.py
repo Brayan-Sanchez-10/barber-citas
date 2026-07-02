@@ -4,7 +4,7 @@ from config.database import get_db
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from models.barbero import Barbero
-from app.exceptions import NoExisteBarbero, YaExisteBarberoConEseID, ContrasenaIncorrecta,  ContrasenaNoSeActualizo, BarberoNoSeElimino, BarberoNoSeActualizo, BarberoNoSeCreo
+from exceptions.barbero_exceptions import NoExisteBarbero, YaExisteBarberoConEseID, ContrasenaIncorrecta,  ContrasenaNoSeActualizo, BarberoNoSeElimino, BarberoNoSeActualizo, BarberoNoSeCreo
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -57,9 +57,9 @@ def update_barbero_service(id_barbero: str, barbero: BarberoUpdate, db: Session)
     if not existe:
         raise NoExisteBarbero(id_barbero)
     
-    if barbero.nombre_barbero:
+    if barbero.nombre_barbero is not None:
         existe.nombre_barbero = barbero.nombre_barbero
-    if barbero.telefono_barbero:
+    if barbero.telefono_barbero is not None:
         existe.telefono_barbero = barbero.telefono_barbero
     
     try:

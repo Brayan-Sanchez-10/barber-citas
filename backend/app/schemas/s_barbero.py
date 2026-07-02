@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field, ConfigDict, model_validator
 from typing import Optional
-from app.exceptions import ContrasenaNoCoinciden
+from exceptions.barbero_exceptions import ContrasenaNoCoinciden
 
 class BarberoCreate(BaseModel):
     id_barbero : str
