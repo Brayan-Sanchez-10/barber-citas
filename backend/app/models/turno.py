@@ -1,12 +1,12 @@
 import uuid
 from config.database import Base
-from sqlalchemy import String, Column, Integer, Date, Time, ForeignKey, Enum, Uuid
+from sqlalchemy import String, Column, Integer, Date, Time, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 
 class Turno(Base):
     __tablename__ = "Turno"
 
-    id_turno = Column(Uuid, primary_key=True, default= uuid.uuid4())
+    id_turno = Column(Integer, primary_key=True, autoincrement= True)
     fecha_turno = Column(Date, nullable= False)
     hora_turno = Column(Time, nullable= False)
     id_servicio = Column(Integer, ForeignKey("Servicio.id_servicio"), ondelete = "CASCADE", nullable= False )

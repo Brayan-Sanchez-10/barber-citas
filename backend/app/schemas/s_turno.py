@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict, UUID4
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 from datetime import date, time
 from enum import Enum
@@ -11,7 +11,7 @@ class TurnoEstado(str, Enum):
 class TurnoCreate(BaseModel):
     fecha_turno : date
     hora_turno : time
-    id_servicio : UUID4
+    id_servicio : int
     id_barbero : str
     estado : TurnoEstado = TurnoEstado.pendiente
     nombre_cliente : str
@@ -20,6 +20,8 @@ class TurnoCreate(BaseModel):
 class TurnoUpdate(BaseModel):
     fecha_turno: Optional[date] = None
     hora_turno : Optional[time] = None
+    id_servicio : Optional[int] = None
+    id_barbero : Optional[str] = None
     nombre_cliente : Optional[str] = None
     telefono_cliente: Optional [str] = None
 
@@ -29,10 +31,10 @@ class TurnoEstadoRealizado(BaseModel):
     estado : TurnoEstado = TurnoEstado.realizado 
 
 class TurnoDelete(BaseModel):
-    id_turno : UUID4
+    id_turno : int
 
 
 class TurnoResponse(TurnoCreate):
-    id_turno : UUID4
+    id_turno : int
 
     model_config =  ConfigDict(from_attributes= True)
