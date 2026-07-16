@@ -10,4 +10,3 @@ class Servicio(Base):
     valor_servicio =  Column(Numeric(10, 2), nullable = False)
 
     turno = relationship("Turno", back_populates="servicio")
-

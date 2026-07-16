@@ -1,5 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends, status
-from schemas.s_barbero import BarberoCreate, BarberoDelete, BarberoResponse, BarberoUpdate, BarberoUpdateContrasena
+from schemas.s_barbero import BarberoCreate, BarberoDelete, BarberoUpdate, BarberoUpdateContrasena
 from config.database import get_db
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError

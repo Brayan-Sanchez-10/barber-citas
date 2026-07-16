@@ -30,10 +30,6 @@ class TurnoEstadoCancelado(BaseModel):
 class TurnoEstadoRealizado(BaseModel):
     estado : TurnoEstado = TurnoEstado.realizado 
 
-class TurnoDelete(BaseModel):
-    id_turno : int
-
-
 class TurnoResponse(TurnoCreate):
     id_turno : int
 

@@ -73,4 +73,3 @@ def delete_servicio_service(id_servicio : int, db : Session):
         db.rollback()
         raise ServicioNoSeElimino(id_servicio)
     
-    return 
